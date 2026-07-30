@@ -72,7 +72,7 @@ export default function StartScreen(){
                         </div>
                     </label>
                     <label 
-                        className="w-1/2 min-h-18 relative cursor-poier [&:has(div.selected)]:bg-slate-300 
+                        className="w-1/2 min-h-18 relative cursor-pointer [&:has(div.selected)]:bg-slate-300 
                         [&:not(:has(div.selected))]:hover:bg-slate-850 flex items-center justify-center rounded-[.5rem]"
                     >
                         <input 
