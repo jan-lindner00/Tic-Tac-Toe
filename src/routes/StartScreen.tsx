@@ -1,16 +1,15 @@
 import IconO from "../components/IconO.js"
 import IconX from "../components/IconX.js"
 import { useAppContext } from "../lib/hooks/useContext.js"
-import type { ChangeEvent } from "react"
-import { Navigate } from "react-router"
+import { useEffect, type ChangeEvent } from "react"
+import { useNavigate } from "react-router"
+import type { GameState } from "../lib/types.js"
+import useLocalStorage from "../lib/hooks/useLocalStorage.js"
 
 export default function StartScreen(){
-    const {isX, setIsX, setIsComputer, isGame, setIsGame} = useAppContext()
-    if(isGame){
-        return(
-            <Navigate to="/game" replace />
-        )
-    }
+    const {isX, setIsX, isComputer, setIsComputer, isGame, setIsGame} = useAppContext()
+    const [_, setGameState] = useLocalStorage<GameState | null>("game-state", null)
+    const navigate = useNavigate()
 
     function toggleIsX(e: ChangeEvent<HTMLInputElement>){
         if(!setIsX){
@@ -30,6 +29,24 @@ export default function StartScreen(){
         setIsComputer(true)
         setIsGame(true)
     }
+
+    useEffect(()=>{
+        function startGame(){
+            const newGameState = {
+                isX,
+                isComputer,
+                isGame: true
+            }
+
+            setGameState({
+                ...newGameState
+            })
+            navigate("/game")
+        }
+        if(isGame){
+            startGame()
+        }
+    }, [isGame])
 
     function startGameVsPlayer(){
          if(!setIsComputer){

@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, useCallback} from "react"
+import {useState, useEffect, useMemo, useCallback, useRef} from "react"
 import { Navigate } from "react-router"
 import useLocalStorage from "../lib/hooks/useLocalStorage.ts"
 import type {GameData, GameState} from "../lib/types.ts"
@@ -11,12 +11,14 @@ import GameHeader from "../components/GameHeader.tsx"
 
 export default function Game(){
     const {isX, isComputer, isGame} = useAppContext()
-    const [_, setGameState] = useLocalStorage<GameState | null>("game-state", null)
+    const [gameState, setGameState] = useLocalStorage<GameState | null>("game-state", null)
     const [gameData, setGameData] = useLocalStorage<GameData | null>("game-data", null)
-    const [xTurn, setXTurn] = useState<boolean>(true)
-    const [fieldsX, setFieldsX] = useState<number[]>([])
-    const [fieldsO, setFieldsO] = useState<number[]>([])
+    const [xTurn, setXTurn] = useState<boolean>(gameData?.xTurn ?? true)
+    const [fieldsX, setFieldsX] = useState<number[]>(gameData?.fieldsX ?? [])
+    const [fieldsO, setFieldsO] = useState<number[]>(gameData?.fieldsX ?? [])
     const [restartModal, setRestartModal] = useState<boolean>(false)
+    const dataRestored = useRef<boolean>(false)
+    
     
     const winningCombos = useMemo(() => shuffleCombos(), [])
     // Derived states
@@ -237,6 +239,7 @@ export default function Game(){
                 setFieldsO(prev => [...prev, field])
             }
         } 
+        dataRestored.current = false
         if(!gameOver){
             nextTurn()
         } 
@@ -257,33 +260,25 @@ export default function Game(){
 
     // Effects
     useEffect(()=>{
-        if(gameData === null){
-            return
-        }
-
         function setGame(){
             setXTurn(gameData?.xTurn ?? true)
             setFieldsX(gameData?.fieldsX ?? [])
             setFieldsO(gameData?.fieldsO ?? [])
         }
-        
+
+        if(gameData === null){
+            return
+        }
+        dataRestored.current = true
         setGame()
     }, [])
 
     useEffect(()=>{
-        const newGameState = {
-            isX,
-            isComputer,
-            isGame: true
-        }
-
-        setGameState({
-            ...newGameState
-        })
-    }, [])
-
-    useEffect(()=>{
         if(!isComputer || gameOver || isX && xTurn || !isX && !xTurn){
+            return
+        }
+        if(dataRestored.current){
+            dataRestored.current = false
             return
         }
         
