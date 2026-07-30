@@ -17,7 +17,6 @@ export default function Game(){
     const [fieldsX, setFieldsX] = useState<number[]>([])
     const [fieldsO, setFieldsO] = useState<number[]>([])
     const [restartModal, setRestartModal] = useState<boolean>(false)
-    const freshLoad = useRef<boolean>(true)
     
     const winningCombos = useMemo(() => shuffleCombos(), [])
     // Derived states
@@ -284,10 +283,7 @@ export default function Game(){
     }, [])
 
     useEffect(()=>{
-        if(!isComputer || gameOver || isX && xTurn || !isX && !xTurn || freshLoad.current){
-            if(freshLoad.current){
-                freshLoad.current = false
-            }
+        if(!isComputer || gameOver || isX && xTurn || !isX && !xTurn){
             return
         }
         
