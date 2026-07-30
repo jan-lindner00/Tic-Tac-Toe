@@ -1,4 +1,4 @@
-import {useState, useEffect, useMemo, useCallback, useRef} from "react"
+import {useState, useEffect, useMemo, useCallback} from "react"
 import { Navigate } from "react-router"
 import useLocalStorage from "../lib/hooks/useLocalStorage.ts"
 import type {GameData, GameState} from "../lib/types.ts"
