@@ -11,7 +11,7 @@ import GameHeader from "../components/GameHeader.tsx"
 
 export default function Game(){
     const {isX, isComputer, isGame} = useAppContext()
-    const [gameState, setGameState] = useLocalStorage<GameState | null>("game-state", null)
+    const [_, setGameState] = useLocalStorage<GameState | null>("game-state", null)
     const [gameData, setGameData] = useLocalStorage<GameData | null>("game-data", null)
     const [xTurn, setXTurn] = useState<boolean>(gameData?.xTurn ?? true)
     const [fieldsX, setFieldsX] = useState<number[]>(gameData?.fieldsX ?? [])
