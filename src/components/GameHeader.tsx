@@ -11,16 +11,16 @@ function GameHeader({xTurn, setRestartModal}:{xTurn: boolean, setRestartModal: D
             className="w-full max-w-[calc(327rem/16)] md:max-w-[calc(461rem/16)] flex justify-between 
             items-center"
         >
-            <img src={Logo} alt="Game Logo X O" />
+            <img src={Logo} alt="" />
             <div 
                 className="min-h-10 md:min-h-12 min-w-[calc(96rem/16)] flex justify-center items-center gap-2 md:gap-[.625rem]
                 text-[.875rem] md:text-[1rem] leading-[1.3] md:leading-[1.25] tracking-[.9px] md:tracking-[1px]
                 font-bold text-slate-300 bg-slate-800 rounded-[.375rem] md:min-w-35 rounded-[.625rem] shadow-game-header"
                 >
                 {xTurn ?  (
-                    <IconX className="w-4 h-4 md:w-5 md:h-5 fill-slate-300" aria-label="X."/>
+                    <IconX testId="xTurn" className="w-4 h-4 md:w-5 md:h-5 fill-slate-300" aria-label="X."/>
                 ) : ( 
-                    <IconO className="w-4 h-4 md:w-5 md:h-5 fill-slate-300" aria-label="O."/>
+                    <IconO testId="oTurn" className="w-4 h-4 md:w-5 md:h-5 fill-slate-300" aria-label="O."/>
                 )}
                 <span>Turn</span>
             </div>
