@@ -1,4 +1,4 @@
-import { describe, expect, test} from "vitest"
+import { describe, expect, test, vi} from "vitest"
 import { screen, render} from "@testing-library/react"
 import "@testing-library/jest-dom"
 import Field from "./Field"
@@ -16,7 +16,7 @@ describe("Field", ()=>{
                 fieldsO={[]}
                 gameWCombo={[]}
                 playedFields={[1]}
-                takeTurn={()=>{}}
+                takeTurn={vi.fn()}
             />
         )
         expect(screen.getByRole("button")).toBeDisabled()
@@ -35,7 +35,7 @@ describe("Field", ()=>{
                 fieldsO={[1]}
                 gameWCombo={[]}
                 playedFields={[1]}
-                takeTurn={()=>{}}
+                takeTurn={vi.fn()}
             />
         )
         expect(screen.getByRole("button")).toBeDisabled()
@@ -54,7 +54,7 @@ describe("Field", ()=>{
                 fieldsO={[4,7,8]}
                 gameWCombo={[1,2,3]}
                 playedFields={[1,2,3,4,7,8]}
-                takeTurn={()=>{}}
+                takeTurn={vi.fn()}
             />
         )
         expect(screen.getByRole("button")).toBeDisabled()
@@ -73,7 +73,7 @@ describe("Field", ()=>{
                 fieldsO={[1,2,3]}
                 gameWCombo={[1,2,3]}
                 playedFields={[1,2,3]}
-                takeTurn={()=>{}}
+                takeTurn={vi.fn()}
             />
         )
         expect(screen.getByRole("button")).toBeDisabled()
@@ -92,7 +92,7 @@ describe("Field", ()=>{
                 fieldsO={[]}
                 gameWCombo={[]}
                 playedFields={[]}
-                takeTurn={()=>{}}
+                takeTurn={vi.fn()}
             />
         )
         expect(screen.getByRole("button")).toBeDisabled()

@@ -1,4 +1,4 @@
-import { describe, expect, test} from "vitest"
+import { describe, expect, test, vi} from "vitest"
 import { screen, render} from "@testing-library/react"
 import "@testing-library/jest-dom"
 import GameHeader from "./GameHeader"
@@ -8,7 +8,7 @@ describe("GameHeader", ()=>{
         render(
             <GameHeader
                 xTurn={true}
-                setRestartModal={()=>{}}
+                setRestartModal={vi.fn()}
             />
         )
         expect(screen.getByTestId("xTurn")).toBeInTheDocument()

@@ -1,4 +1,4 @@
-import { describe, expect, test} from "vitest"
+import { describe, expect, test, vi} from "vitest"
 import { screen, render} from "@testing-library/react"
 import "@testing-library/jest-dom"
 import GameEndModal from "./GameEndModal"
@@ -11,9 +11,9 @@ describe("GameEndModal", ()=>{
                 <GameEndModal
                     xHasWon={true}
                     oHasWon={false}
-                    setGameState={()=>{}}
-                    setGameData={()=>{}}
-                    newRound={()=>{}}
+                    setGameState={vi.fn()}
+                    setGameData={vi.fn()}
+                    newRound={vi.fn()}
                 />
             </AppContextProvider>
         )
@@ -27,9 +27,9 @@ describe("GameEndModal", ()=>{
                 <GameEndModal
                     xHasWon={false}
                     oHasWon={true}
-                    setGameState={()=>{}}
-                    setGameData={()=>{}}
-                    newRound={()=>{}}
+                    setGameState={vi.fn()}
+                    setGameData={vi.fn()}
+                    newRound={vi.fn()}
                 />
             </AppContextProvider>
         )
@@ -43,9 +43,9 @@ describe("GameEndModal", ()=>{
                 <GameEndModal
                     xHasWon={false}
                     oHasWon={false}
-                    setGameState={()=>{}}
-                    setGameData={()=>{}}
-                    newRound={()=>{}}
+                    setGameState={vi.fn()}
+                    setGameData={vi.fn()}
+                    newRound={vi.fn()}
                 />
             </AppContextProvider>
         )
@@ -58,9 +58,9 @@ describe("GameEndModal", ()=>{
                 <GameEndModal
                     xHasWon={false}
                     oHasWon={false}
-                    setGameState={()=>{}}
-                    setGameData={()=>{}}
-                    newRound={()=>{}}
+                    setGameState={vi.fn()}
+                    setGameData={vi.fn()}
+                    newRound={vi.fn()}
                 />
             </AppContextProvider>
         )
