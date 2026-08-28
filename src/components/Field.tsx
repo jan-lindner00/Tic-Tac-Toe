@@ -29,8 +29,8 @@ function Field({field, xTurn, xHasWon, oHasWon, gameOver, fieldsX, fieldsO, game
             data-field={field}
             aria-label={`Field number ${field}: .${fieldsX.includes(field) ? "X" : fieldsO.includes(field) ? "O" : "Empty"}. ${!playedFields.includes(field) ? "Press to play." : ""}`}
         >
-            {fieldsX.includes(field) && <IconX className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-teal-400"}`}/>}
-            {fieldsO.includes(field) && <IconO className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-amber-400"}`}/>}
+            {fieldsX.includes(field) && <IconX testId={gameWCombo.includes(field) ? "gameWinningComboX" : "fieldPlayedX"} className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-teal-400"}`}/>}
+            {fieldsO.includes(field) && <IconO testId={gameWCombo.includes(field) ? "gameWinningComboO" : "fieldPlayedO"} className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-amber-400"}`}/>}
         </button>
     )
 }
