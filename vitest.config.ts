@@ -5,5 +5,8 @@ export default defineConfig({
         setupFiles: ["./test-setup.js"],
         environment: 'jsdom',
         globals: true,
+        coverage: {
+            provider: 'istanbul'
+        }
     }
 })
