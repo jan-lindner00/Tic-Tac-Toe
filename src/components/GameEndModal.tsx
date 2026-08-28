@@ -44,11 +44,11 @@ function GameEndModal({xHasWon, oHasWon, setGameState, setGameData, newRound}:
             >
                 {xHasWon && <img className="w-[1.625rem] md:w-16" src={IconX} alt="X"/>}
                 {oHasWon && <img className="w-[1.625rem] md:w-16" src={IconO} alt="O"/>}
-                <span 
+                <h2
                     className={`w-max my-auto ${xHasWon ? "text-teal-400": oHasWon ? "text-amber-400": "text-slate-300"}`}
                 >
                     {(xHasWon || oHasWon) ? "Takes the round" : "Round tied"}
-                </span>
+                </h2>
             </div>
             <div className="flex gap-4">
                 <button className="p-4 bg-slate-300 hover:bg-slate-100 text-slate-900 rounded-[.625rem] shadow-cancel-btn" onClick={quit}>Quit</button>
