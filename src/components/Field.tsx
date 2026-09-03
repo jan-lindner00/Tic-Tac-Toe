@@ -25,9 +25,9 @@ function Field({field, xTurn, xHasWon, oHasWon, gameOver, fieldsX, fieldsO, game
             key={field}
             className={classNameField}
             disabled={gameOver || playedFields.includes(field) || isComputer && isX && !xTurn || isComputer && !isX &&  xTurn }
-            onClick={(gameOver || playedFields.includes(field) || isComputer && isX && !xTurn || isComputer && !isX &&  xTurn) ? () => {} : () => takeTurn(field)}
+            onClick={() => takeTurn(field)}
             data-field={field}
-            aria-label={`Field number ${field}: .${fieldsX.includes(field) ? "X" : fieldsO.includes(field) ? "O" : "Empty"}. ${!playedFields.includes(field) ? "Press to play." : ""}`}
+            aria-label={`Field number ${field}: .${fieldsX.includes(field) ? "X" : fieldsO.includes(field) ? "O" : "Empty"}. ${!playedFields.includes(field) ? "Press to play field." : ""}`}
         >
             {fieldsX.includes(field) && <IconX testId={gameWCombo.includes(field) ? "gameWinningComboX" : "fieldPlayedX"} className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-teal-400"}`}/>}
             {fieldsO.includes(field) && <IconO testId={gameWCombo.includes(field) ? "gameWinningComboO" : "fieldPlayedO"} className={`${gameWCombo.includes(field) ?  "fill-slate-800" : "fill-amber-400"}`}/>}
