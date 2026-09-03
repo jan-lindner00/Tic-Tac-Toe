@@ -51,7 +51,12 @@ function GameEndModal({xHasWon, oHasWon, setGameState, setGameData, newRound}:
                 </h2>
             </div>
             <div className="flex gap-4">
-                <button className="p-4 bg-slate-300 hover:bg-slate-100 text-slate-900 rounded-[.625rem] shadow-cancel-btn" onClick={quit}>Quit</button>
+                <button 
+                    className="p-4 bg-slate-300 hover:bg-slate-100 text-slate-900 rounded-[.625rem] shadow-cancel-btn" 
+                    onClick={quit}
+                >
+                    Quit
+                </button>
                 <NextRoundBtn onClick={newRound}>Next Round</NextRoundBtn>
             </div>
         </dialog>

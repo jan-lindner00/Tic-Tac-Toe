@@ -1,5 +1,5 @@
 "use client"
-import { useSyncExternalStore, useCallback, useState } from "react";
+import { useSyncExternalStore, useCallback, useRef } from "react";
 
 export default function useLocalStorage<T>(key: string, initialValue: T): [T, (newValue: T ) => void]{
     const subscribe = useCallback((callback: () => void): (() => void) => {
@@ -7,20 +7,15 @@ export default function useLocalStorage<T>(key: string, initialValue: T): [T, (n
         return () => { window.removeEventListener("storage", callback)}
     }, [])
 
-    const getData = useCallback((): T => {
-        const item = localStorage?.getItem(key)
-        return item ? JSON.parse(item) : initialValue
-    }, [key, initialValue])
-
-    const [cachedDataSnapshot, setCachedDataSnapshot] = useState<T>(initialValue)
+    const cacheRef = useRef<{raw: string,value: T}>({raw: '', value: initialValue})
 
     const getSnapshot = useCallback((): T => {
-        const currentData = getData()
-        if((typeof currentData === "object" || currentData === null) && currentData?.toString() !== cachedDataSnapshot?.toString()){
-            setCachedDataSnapshot(currentData)
+        const raw = localStorage.getItem(key) ?? '';
+        if (raw !== cacheRef.current.raw) {
+            cacheRef.current = { raw, value: raw ? JSON.parse(raw) : initialValue }
         }
-        return cachedDataSnapshot
-    }, [cachedDataSnapshot, getData])
+        return cacheRef.current.value
+    }, [key, initialValue])
 
     const value: T = useSyncExternalStore(subscribe, getSnapshot)
     
